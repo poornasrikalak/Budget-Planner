@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Budget Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Additional CSS for side-by-side layout in dashboard */
+    .dashboard-content {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .dashboard-left, .dashboard-right {
+      flex: 1;
+      min-width: 300px;
+    }
+    .dashboard-right {
+      flex: 1.2; /* Slightly wider for table */
+    }
+    @media (max-width: 768px) {
+      .dashboard-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="title">💰 Budget Planner</h1>
+
+    <!-- Login Panel -->
+    <section id="login-panel" class="panel">
+      <h2>Login</h2>
+      <input id="login-email" type="email" placeholder="Email" />
+      <input id="login-password" type="password" placeholder="Password" />
+      <button id="login-btn">Login</button>
+      <div id="login-msg" class="msg"></div>
+      <p>Don't have an account?
+        <button id="go-register" class="link-btn">Register</button>
+      </p>
+    </section>
+
+    <!-- Register Panel -->
+    <section id="register-panel" class="panel hidden">
+      <h2>Create Account</h2>
+      <input id="reg-email" type="email" placeholder="Enter your Gmail or email" />
+      <button id="send-otp-btn">Send OTP</button>
+      <div id="reg-step1-msg" class="msg"></div>
+
+      <div id="otp-section" class="hidden">
+        <p>OTP sent to: <span id="otp-email"></span></p>
+        <input id="otp-input" type="text" placeholder="Enter OTP" maxlength="6" />
+        <button id="verify-otp-btn">Verify OTP</button>
+        <p class="muted small">Demo OTP: <strong id="shown-otp">-</strong></p>
+        <div class="flex-links">
+          <button id="resend-otp" class="link-btn">Resend OTP</button>
+          <button id="cancel-register" class="link-btn">Cancel</button>
+        </div>
+        <div id="reg-step2-msg" class="msg"></div>
+      </div>
+
+      <div id="set-password-section" class="hidden">
+        <input id="password-input" type="password" placeholder="Password (min 6 chars)" />
+        <input id="password-confirm" type="password" placeholder="Confirm password" />
+        <button id="create-account-btn">Create Account</button>
+        <div id="reg-step3-msg" class="msg"></div>
+      </div>
+    </section>
+
+    <!-- Profile Panel -->
+    <section id="profile-panel" class="panel hidden">
+      <h2>Complete Your Profile</h2>
+      <input id="p-name" placeholder="Full Name" />
+      <input id="p-mobile" placeholder="Mobile Number" type="tel" />
+      <input id="p-age" placeholder="Age" type="number" />
+      <input id="p-profession" placeholder="Profession" />
+      <input id="p-workspace" placeholder="Workspace Details" />
+      <input id="p-salary" placeholder="Salary" type="number" />
+      <input id="p-savings" placeholder="Savings % (e.g., 10 for 10%)" type="number" />
+      <button id="save-profile-btn">Save Profile</button>
+    </section>
+
+    <!-- Dashboard Panel -->
+    <section id="dashboard-panel" class="panel hidden">
+      <h2 id="welcome-name"></h2>
+      
+      <!-- Side-by-side layout: Left (Salary/Expense Details & Add Expense), Right (Table & Summary) -->
+      <div class="dashboard-content">
+        <div class="dashboard-left">
+          <p><b>Salary:</b> ₹<span id="salary-val"></span></p>
+          <p><b>Planned Savings:</b> ₹<span id="savings-val"></span></p>
+          <p><b>Spendable Salary:</b> ₹<span id="spendable-val"></span></p>
+          <p><b>Total Expenses:</b> ₹<span id="total-expense"></span></p>
+          <p><b>Remaining Balance:</b> ₹<span id="balance-val"></span></p>
+
+          <h3>Add Expense</h3>
+          <input id="exp-title" placeholder="Expense Title"/>
+          <input id="exp-amount" type="number" placeholder="Amount"/>
+          <input id="exp-category" placeholder="Category"/>
+          <input id="exp-date" type="date" value="" />
+          <button id="add-expense-btn">Add Expense</button>
+        </div>
+
+        <div class="dashboard-right">
+          <h3>Expenses</h3>
+          <table class="expense-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="expense-body"></tbody>
+          </table>
+
+          <h3>Summary by Category</h3>
+          <div id="expense-summary" class="expense-summary"></div>
+        </div>
+      </div>
+
+      <button id="edit-profile-btn">Edit Profile</button>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

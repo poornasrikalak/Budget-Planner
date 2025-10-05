@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💰 Budget Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="card" id="login-card">
+    <h1 class="title">💰 Budget Planner</h1>
+    <h2>Login</h2>
+    <input type="text" id="loginEmail" placeholder="Enter Email">
+    <input type="password" id="loginPassword" placeholder="Enter Password">
+    <p class="error" id="loginError"></p>
+    <button onclick="login()">Login</button>
+    <p>New user? <button class="link-btn" onclick="showRegister()">Register</button></p>
+  </div>
+
+  <!-- REGISTER -->
+  <div class="card hidden" id="register-card">
+    <h1 class="title">Register</h1>
+    <input type="text" id="regEmail" placeholder="Enter Email">
+    <button onclick="sendOtp()">Send OTP</button>
+    <input type="text" id="otp" placeholder="Enter OTP">
+    <input type="password" id="regPassword" placeholder="Create Password">
+    <p class="error" id="registerError"></p>
+    <button onclick="register()">Register</button>
+    <button class="link-btn" onclick="showLogin()">Back to Login</button>
+  </div>
+
+  <!-- PROFILE CREATION -->
+  <div class="card hidden" id="profile-card">
+    <h1 class="title">Create Profile</h1>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="mobile" placeholder="Mobile Number">
+    <input type="number" id="age" placeholder="Age">
+    <input type="text" id="profession" placeholder="Profession">
+    <input type="text" id="workspace" placeholder="Workspace Details">
+    <input type="number" id="salary" placeholder="Monthly Salary">
+    <input type="number" id="savingsPercent" placeholder="Savings % (e.g. 20)">
+    <p class="error" id="profileError"></p>
+    <button onclick="saveProfile()">Save Profile</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="hidden" id="dashboard">
+    <div class="dashboard-header">
+      <h2>💰 Budget Planner</h2>
+      <div class="dashboard-buttons">
+        <button onclick="viewProfile()">Profile</button>
+        <button onclick="newProfile()">New Profile</button>
+        <button onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="dashboard-container">
+      <!-- Expense Form -->
+      <div class="box">
+        <h3 id="formTitle">Add Expense</h3>
+        <input type="text" id="expenseName" placeholder="Expense Name">
+        <input type="number" id="expenseAmount" placeholder="Amount">
+        <input type="date" id="expenseDate">
+        <p class="error" id="expenseError"></p>
+        <button id="add-expense-btn" onclick="addExpense()">Add</button>
+        <button id="update-expense-btn" class="hidden" onclick="updateExpense()">Update</button>
+
+        <table id="expenseTable">
+          <thead>
+            <tr>
+              <th>Expense</th>
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <!-- Summary -->
+      <div class="box">
+        <h3>Summary</h3>
+        <p id="salaryDisplay">Salary: ₹0</p>
+        <p id="savingsDisplay">Savings (xx%): ₹0</p>
+        <p id="availableDisplay">Available for Expenses: ₹0</p>
+        <p id="totalExpenses">Total Expenses: ₹0</p>
+        <p id="balanceDisplay">Balance Left: ₹0</p>
+        <p id="balanceWarning" style="color:red;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE VIEW -->
+  <div class="card hidden" id="profile-view">
+    <h1 class="title">My Profile</h1>
+    <p id="profileDetails"></p>
+    <button onclick="editProfile()">Edit</button>
+    <button onclick="closeProfile()">Close</button>
+  </div>
+
+  <!-- AI Chatbot -->
+  <button id="chatbot-toggle">💬</button>
+  <div id="chatbot-box" class="hidden">
+    <div id="chatbot-header">Budget Assistant</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-wrap">
+      <input id="chatbot-input" placeholder="Ask about your budget..." />
+      <button id="chatbot-send">Send</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
